@@ -10,7 +10,7 @@ namespace KrazyKatgames
         }
         protected virtual AIAnimalState SwitchState(AnimalManager animal, AIAnimalState newState)
         {
-            Debug.LogWarning(animal.name + " SwitchState to " + newState.name);
+//            Debug.LogWarning(animal.name + " SwitchState to " + newState.name);
             
             ResetStateFlags(animal);
             return newState;

@@ -31,6 +31,15 @@ namespace KrazyKatgames
         }
         protected override void OnTriggerEnter(Collider other)
         {
+            Debug.LogWarning("in MeleeWeaponDamageCollider.. OnTriggerEnter(Collider other): " + other.name);
+            Debug.LogWarning("TAG: " + other.tag);
+
+            
+            if (other.CompareTag("HarvestGround"))
+            {
+                Debug.LogWarning("in MeleeWeaponDamageCollider.. Do something Attacked the ground");
+            }
+            
             CharacterManager damageTarget = other.GetComponentInParent<CharacterManager>();
 
             if (damageTarget != null)

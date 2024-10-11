@@ -17,9 +17,8 @@ namespace KrazyKatgames
         // THE FORCE AT WHICH OUR CHARACTER BEGINS TO FALL WHEN THEY BECOME UNGROUNDED (RISES AS THEY FALL LONGER)
         protected bool fallingVelocityHAsBeenSet = false;
         [SerializeField] protected float inAirTimer = 0;
-        //public FootIK footIk;
 
-        [Header("Flags")]
+        [Header("Movement Flags")]
         public bool isRolling = false;
         public bool canRotate = true;
         public bool canMove = true;
@@ -31,7 +30,6 @@ namespace KrazyKatgames
         }
         protected virtual void Start()
         {
-            //   footIk = GetComponent<FootIK>();
         }
 
         protected virtual void Update()

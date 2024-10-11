@@ -43,8 +43,7 @@ namespace KrazyKatgames
         protected override void Update()
         {
             base.Update();
-
-
+            
             playerLocomotionManager.HandleAllMovement();
             playerStatsManager.RegenerateStamina();
             DebugMenu();
@@ -85,7 +84,7 @@ namespace KrazyKatgames
             // Make Inventory (!) 
             // Make Equipment Manager (!) 
 
-            playerAnimatorManager.PlayTargetActionAnimation("Chopping_01", true);
+            playerAnimatorManager.PlayTargetActionAnimation("Working_01", true);
             // or:   playerAnimatorManager.PlayTargetActionAnimation("Working_01", true);
             // or: ... 
         }

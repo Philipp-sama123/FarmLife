@@ -46,15 +46,9 @@ namespace KrazyKatgames
         [SerializeField] bool RT_Input = false;
         [SerializeField] bool Hold_RT_Input = false;
 
-        [Header("Input queue")]
-        [SerializeField] private bool input_Que_Is_Active = false;
-        [SerializeField] float que_Input_Timer = 0.0f;
-        [SerializeField] float default_Que_Input_Time = 0.25f;
-
-        [SerializeField] bool que_RB_Input = false;
-        [SerializeField] bool que_RT_Input = false;
-
-
+        [Header("Debug")]
+        [SerializeField] bool halfMovementInput = false;
+        [SerializeField] bool debugStrafing = false;
         private void Awake()
         {
             if (instance == null)
@@ -70,14 +64,6 @@ namespace KrazyKatgames
         private void Start()
         {
             DontDestroyOnLoad(gameObject);
-
-            //  WHEN THE SCENE CHANGES, RUN THIS LOGIC
-            //  SceneManager.activeSceneChanged += OnSceneChange;
-            //
-            // if (playerControls != null)
-            // {
-            //     playerControls.Disable();
-            // }
         }
 
         private void OnEnable()
@@ -119,13 +105,6 @@ namespace KrazyKatgames
 
             playerControls.Enable();
         }
-
-        private void OnDestroy()
-        {
-            //  IF WE DESTROY THIS OBJECT, UNSUBSCRIBE FROM THIS EVENT
-            //    SceneManager.activeSceneChanged -= OnSceneChange;
-        }
-
 
         private void Update()
         {
@@ -182,6 +161,15 @@ namespace KrazyKatgames
             {
                 moveAmount = 1;
             }
+
+            if (halfMovementInput)
+            {
+                moveAmount /= 2;
+                horizontal_Input /= 2;
+                vertical_Input /= 2;
+            }
+            player.isLockedOn = debugStrafing;
+
             // WHY DO WE PASS 0 ON THE HORIZONTAL? BECAUSE WE ONLY WANT NON-STRAFING MOVEMENT
             // WE USE THE HORIZONTAL WHEN WE ARE STRAFING OR LOCKED ON
 
@@ -192,17 +180,15 @@ namespace KrazyKatgames
                 player.isMoving = true;
             //  IF WE ARE NOT LOCKED ON, ONLY USE THE MOVE AMOUNT
 
-            // if (!player.isLockedOn || player.isSprinting)
-            // {
-            player.playerAnimatorManager.UpdateAnimatorMovementParameters(0, moveAmount, player.isSprinting);
-            // }
-            // else
-            // {
-            //     player.playerAnimatorManager.UpdateAnimatorMovementParameters(horizontal_Input, vertical_Input,
-            //         player.isSprinting);
-            // }
-
-            //  IF WE ARE LOCKED ON PASS THE HORIZONTAL MOVEMENT AS WELL
+            if (!debugStrafing || player.isSprinting)
+            {
+                player.playerAnimatorManager.UpdateAnimatorMovementParameters(0, moveAmount, player.isSprinting);
+            }
+            else
+            {
+                player.playerAnimatorManager.UpdateAnimatorMovementParameters(horizontal_Input, vertical_Input,
+                    player.isSprinting);
+            }
         }
         private void HandleCameraMovementInput()
         {

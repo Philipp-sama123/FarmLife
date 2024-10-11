@@ -36,14 +36,12 @@ namespace KrazyKatgames
 
             InitializeWeaponSlots();
 
-            List<GameObject> underwearObjectsList = new List<GameObject>();
+            CloseDamageCollider();
         }
 
         protected override void Start()
         {
             base.Start();
-
-            LoadWeaponsOnBothHands();
         }
 
         private void Update()
@@ -82,6 +80,8 @@ namespace KrazyKatgames
         private void DebugEquipNewItems()
         {
             Debug.LogWarning("Equip New Items!");
+            
+            LoadWeaponsOnBothHands();
         }
 
         public void LoadWeaponsOnBothHands()
@@ -176,9 +176,11 @@ namespace KrazyKatgames
                 rightHandWeaponSlot.LoadWeapon(rightHandWeaponModel);
                 rightWeaponManager = rightHandWeaponModel.GetComponent<WeaponManager>();
                 rightWeaponManager.SetWeaponDamage(player, player.playerInventoryManager.currentRightHandWeapon);
-
+        
                 // Animator Controller is always depending on the Right Weapon (!) its the Main Weapon (!)
                 player.playerAnimatorManager.UpdateAnimatorController(player.playerInventoryManager.currentRightHandWeapon.weaponAnimator);
+                
+                player.isUsingRightHand = true;
             }
         }
 
@@ -282,6 +284,8 @@ namespace KrazyKatgames
 
                 leftWeaponManager = leftHandWeaponModel.GetComponent<WeaponManager>();
                 leftWeaponManager.SetWeaponDamage(player, player.playerInventoryManager.currentLeftHandWeapon);
+                
+                player.isUsingRightHand = true;
             }
         }
 
@@ -294,16 +298,19 @@ namespace KrazyKatgames
             if (player.isUsingRightHand)
             {
                 rightWeaponManager.meleeDamageCollider.EnableDamageCollider();
-                player.characterSoundFXManager.PlaySoundFX(
-                    WorldSoundFXManager.instance.ChooseRandomSFXFromArray(player.playerInventoryManager.currentRightHandWeapon.whooshes));
+                // Play whoosh sfx (!)
+
+                // player.characterSoundFXManager.PlaySoundFX(
+                //     WorldSoundFXManager.instance.ChooseRandomSFXFromArray(player.playerInventoryManager.currentRightHandWeapon.whooshes));
             }
             else if (player.isUsingLeftHand)
             {
                 leftWeaponManager.meleeDamageCollider.EnableDamageCollider();
-                player.characterSoundFXManager.PlaySoundFX(
-                    WorldSoundFXManager.instance.ChooseRandomSFXFromArray(player.playerInventoryManager.currentLeftHandWeapon.whooshes));
+                // Play whoosh sfx (!)
+
+                // player.characterSoundFXManager.PlaySoundFX(
+                //     WorldSoundFXManager.instance.ChooseRandomSFXFromArray(player.playerInventoryManager.currentLeftHandWeapon.whooshes));
             }
-            // Play whoosh sfx (!)
         }
         public void CloseDamageCollider()
         {
@@ -317,25 +324,5 @@ namespace KrazyKatgames
             }
         }
         #endregion
-        // Two Handing (!)
-        public void UnTwoHandWeapon()
-        {
-            Debug.LogWarning("PLAYER EQUIPMENT MANAGER: UnTwoHandWeapon");
-            player.playerAnimatorManager.UpdateAnimatorController(player.playerInventoryManager.currentRightHandWeapon.weaponAnimator);
-
-            if (player.playerInventoryManager.currentLeftHandWeapon.weaponModelType == WeaponModelType.Weapon)
-            {
-                leftHandWeaponSlot.PlaceWeaponModelIntoSlot(leftHandWeaponModel);
-            }
-            else if (player.playerInventoryManager.currentLeftHandWeapon.weaponModelType == WeaponModelType.Shield)
-            {
-                leftHandShieldSlot.PlaceWeaponModelIntoSlot(leftHandWeaponModel);
-            }
-
-            rightHandWeaponSlot.PlaceWeaponModelIntoSlot(rightHandWeaponModel);
-
-            rightWeaponManager.SetWeaponDamage(player, player.playerInventoryManager.currentRightHandWeapon);
-            leftWeaponManager.SetWeaponDamage(player, player.playerInventoryManager.currentLeftHandWeapon);
-        }
     }
 }

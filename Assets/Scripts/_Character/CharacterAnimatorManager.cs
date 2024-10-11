@@ -159,7 +159,8 @@ namespace KrazyKatgames
         }
         public void UpdateAnimatorController(AnimatorOverrideController weaponController)
         {
-            character.animator.runtimeAnimatorController = weaponController;
+            if (weaponController != null)
+                character.animator.runtimeAnimatorController = weaponController;
         }
     }
 }
