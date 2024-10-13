@@ -1,0 +1,359 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &86815123619787615
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 346501994338269301}
+  - component: {fileID: 3734761291319608155}
+  m_Layer: 0
+  m_Name: WorldSaveGameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &346501994338269301
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 86815123619787615}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3734761291319608155
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 86815123619787615}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d6cf123ad3054fb6a58946ee2150099, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 0}
+  saveGame: 0
+  loadGame: 0
+  worldSceneIndex: 1
+  currentCharacterSlotBeingUsed: 0
+  currentCharacterData:
+    sceneIndex: 1
+    characterName: Character
+    secondsPlayed: 0
+    xPosition: 0
+    yPosition: 0
+    zPosition: 0
+    currentHealth: 0
+    currentStamina: 0
+    endurance: 10
+    vitality: 10
+    rightWeaponIndex: 0
+    rightWeapon01: 0
+    rightWeapon02: 0
+    rightWeapon03: 0
+    leftWeaponIndex: 0
+    leftWeapon01: 0
+    leftWeapon02: 0
+    leftWeapon03: 0
+    bossesAwakened:
+      keys: 
+      values: 
+    bossesDefeated:
+      keys: 
+      values: 
+    worldItemsLooted:
+      keys: 
+      values: 
+  characterSlot01:
+    sceneIndex: 1
+    characterName: Character
+    secondsPlayed: 0
+    xPosition: 0
+    yPosition: 0
+    zPosition: 0
+    currentHealth: 0
+    currentStamina: 0
+    endurance: 10
+    vitality: 10
+    rightWeaponIndex: 0
+    rightWeapon01: 0
+    rightWeapon02: 0
+    rightWeapon03: 0
+    leftWeaponIndex: 0
+    leftWeapon01: 0
+    leftWeapon02: 0
+    leftWeapon03: 0
+    bossesAwakened:
+      keys: 
+      values: 
+    bossesDefeated:
+      keys: 
+      values: 
+    worldItemsLooted:
+      keys: 
+      values: 
+  characterSlot02:
+    sceneIndex: 1
+    characterName: Character
+    secondsPlayed: 0
+    xPosition: 0
+    yPosition: 0
+    zPosition: 0
+    currentHealth: 0
+    currentStamina: 0
+    endurance: 10
+    vitality: 10
+    rightWeaponIndex: 0
+    rightWeapon01: 0
+    rightWeapon02: 0
+    rightWeapon03: 0
+    leftWeaponIndex: 0
+    leftWeapon01: 0
+    leftWeapon02: 0
+    leftWeapon03: 0
+    bossesAwakened:
+      keys: 
+      values: 
+    bossesDefeated:
+      keys: 
+      values: 
+    worldItemsLooted:
+      keys: 
+      values: 
+  characterSlot03:
+    sceneIndex: 1
+    characterName: Character
+    secondsPlayed: 0
+    xPosition: 0
+    yPosition: 0
+    zPosition: 0
+    currentHealth: 0
+    currentStamina: 0
+    endurance: 10
+    vitality: 10
+    rightWeaponIndex: 0
+    rightWeapon01: 0
+    rightWeapon02: 0
+    rightWeapon03: 0
+    leftWeaponIndex: 0
+    leftWeapon01: 0
+    leftWeapon02: 0
+    leftWeapon03: 0
+    bossesAwakened:
+      keys: 
+      values: 
+    bossesDefeated:
+      keys: 
+      values: 
+    worldItemsLooted:
+      keys: 
+      values: 
+  characterSlot04:
+    sceneIndex: 1
+    characterName: Character
+    secondsPlayed: 0
+    xPosition: 0
+    yPosition: 0
+    zPosition: 0
+    currentHealth: 0
+    currentStamina: 0
+    endurance: 10
+    vitality: 10
+    rightWeaponIndex: 0
+    rightWeapon01: 0
+    rightWeapon02: 0
+    rightWeapon03: 0
+    leftWeaponIndex: 0
+    leftWeapon01: 0
+    leftWeapon02: 0
+    leftWeapon03: 0
+    bossesAwakened:
+      keys: 
+      values: 
+    bossesDefeated:
+      keys: 
+      values: 
+    worldItemsLooted:
+      keys: 
+      values: 
+  characterSlot05:
+    sceneIndex: 1
+    characterName: Character
+    secondsPlayed: 0
+    xPosition: 0
+    yPosition: 0
+    zPosition: 0
+    currentHealth: 0
+    currentStamina: 0
+    endurance: 10
+    vitality: 10
+    rightWeaponIndex: 0
+    rightWeapon01: 0
+    rightWeapon02: 0
+    rightWeapon03: 0
+    leftWeaponIndex: 0
+    leftWeapon01: 0
+    leftWeapon02: 0
+    leftWeapon03: 0
+    bossesAwakened:
+      keys: 
+      values: 
+    bossesDefeated:
+      keys: 
+      values: 
+    worldItemsLooted:
+      keys: 
+      values: 
+  characterSlot06:
+    sceneIndex: 1
+    characterName: Character
+    secondsPlayed: 0
+    xPosition: 0
+    yPosition: 0
+    zPosition: 0
+    currentHealth: 0
+    currentStamina: 0
+    endurance: 10
+    vitality: 10
+    rightWeaponIndex: 0
+    rightWeapon01: 0
+    rightWeapon02: 0
+    rightWeapon03: 0
+    leftWeaponIndex: 0
+    leftWeapon01: 0
+    leftWeapon02: 0
+    leftWeapon03: 0
+    bossesAwakened:
+      keys: 
+      values: 
+    bossesDefeated:
+      keys: 
+      values: 
+    worldItemsLooted:
+      keys: 
+      values: 
+  characterSlot07:
+    sceneIndex: 1
+    characterName: Character
+    secondsPlayed: 0
+    xPosition: 0
+    yPosition: 0
+    zPosition: 0
+    currentHealth: 0
+    currentStamina: 0
+    endurance: 10
+    vitality: 10
+    rightWeaponIndex: 0
+    rightWeapon01: 0
+    rightWeapon02: 0
+    rightWeapon03: 0
+    leftWeaponIndex: 0
+    leftWeapon01: 0
+    leftWeapon02: 0
+    leftWeapon03: 0
+    bossesAwakened:
+      keys: 
+      values: 
+    bossesDefeated:
+      keys: 
+      values: 
+    worldItemsLooted:
+      keys: 
+      values: 
+  characterSlot08:
+    sceneIndex: 1
+    characterName: Character
+    secondsPlayed: 0
+    xPosition: 0
+    yPosition: 0
+    zPosition: 0
+    currentHealth: 0
+    currentStamina: 0
+    endurance: 10
+    vitality: 10
+    rightWeaponIndex: 0
+    rightWeapon01: 0
+    rightWeapon02: 0
+    rightWeapon03: 0
+    leftWeaponIndex: 0
+    leftWeapon01: 0
+    leftWeapon02: 0
+    leftWeapon03: 0
+    bossesAwakened:
+      keys: 
+      values: 
+    bossesDefeated:
+      keys: 
+      values: 
+    worldItemsLooted:
+      keys: 
+      values: 
+  characterSlot09:
+    sceneIndex: 1
+    characterName: Character
+    secondsPlayed: 0
+    xPosition: 0
+    yPosition: 0
+    zPosition: 0
+    currentHealth: 0
+    currentStamina: 0
+    endurance: 10
+    vitality: 10
+    rightWeaponIndex: 0
+    rightWeapon01: 0
+    rightWeapon02: 0
+    rightWeapon03: 0
+    leftWeaponIndex: 0
+    leftWeapon01: 0
+    leftWeapon02: 0
+    leftWeapon03: 0
+    bossesAwakened:
+      keys: 
+      values: 
+    bossesDefeated:
+      keys: 
+      values: 
+    worldItemsLooted:
+      keys: 
+      values: 
+  characterSlot10:
+    sceneIndex: 1
+    characterName: Character
+    secondsPlayed: 0
+    xPosition: 0
+    yPosition: 0
+    zPosition: 0
+    currentHealth: 0
+    currentStamina: 0
+    endurance: 10
+    vitality: 10
+    rightWeaponIndex: 0
+    rightWeapon01: 0
+    rightWeapon02: 0
+    rightWeapon03: 0
+    leftWeaponIndex: 0
+    leftWeapon01: 0
+    leftWeapon02: 0
+    leftWeapon03: 0
+    bossesAwakened:
+      keys: 
+      values: 
+    bossesDefeated:
+      keys: 
+      values: 
+    worldItemsLooted:
+      keys: 
+      values: 

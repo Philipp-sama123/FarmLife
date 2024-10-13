@@ -20,23 +20,7 @@ namespace KrazyKatgames
 
         [Header("Main Hand Backstep Attacks")]
         [SerializeField] private string backstep_attack_01 = "Main_Backstep_Attack_01";
-
-        // Two Hand
-        [Header("Main Hand Light Attacks")]
-        [SerializeField] private string th_light_Attack_01 = "TH_Light_Attack_01"; // Main Hand (Right) Light Attack
-        [SerializeField] private string th_light_Attack_02 = "TH_Light_Attack_02";
-        [SerializeField] private string th_light_Attack_03 = "TH_Light_Attack_03";
-        [SerializeField] private string th_light_Attack_04 = "TH_Light_Attack_04";
-
-        [Header("Two Hand Running Attacks")]
-        [SerializeField] private string th_run_attack_01 = "TH_Run_Attack_01";
-
-        [Header("Two Hand Rolling Attacks")]
-        [SerializeField] private string th_roll_attack_01 = "TH_Roll_Attack_01";
-
-        [Header("Two Hand Backstep Attacks")]
-        [SerializeField] private string th_backstep_attack_01 = "TH_Backstep_Attack_01";
-
+        
         public override void AttemptToPerformAction(PlayerManager playerPerformingAction, WeaponItem weaponPerformingAction)
         {
             base.AttemptToPerformAction(playerPerformingAction, weaponPerformingAction);

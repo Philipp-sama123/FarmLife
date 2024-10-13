@@ -8,7 +8,6 @@ namespace KrazyKatgames
         public string interactableText;
 
         [SerializeField] protected Collider interactableCollider;
-        [SerializeField] protected bool hostOnlyInteractable = true;
 
         protected virtual void Awake()
         {
@@ -40,8 +39,8 @@ namespace KrazyKatgames
             PlayerManager player = other.GetComponent<PlayerManager>();
             if (player != null)
             {
-                player.playerInteractionManager.RemoveInteractionFromList(this);
-                //    PlayerUIManager.instance.playerUIPopUpManager.CloseAllPopupWindows();
+                player.playerInteractionManager.RemoveInteractionFromList(this); 
+                PlayerUIManager.instance.playerUIPopUpManager.CloseAllPopupWindows();
             }
         }
     }

@@ -14,13 +14,13 @@ TagManager:
   - 
   - Water
   - UI
+  - Character
+  - DamageableCharacter
   - 
   - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - DamageCollider
+  - EventTrigger
+  - Interactable
   - 
   - 
   - 

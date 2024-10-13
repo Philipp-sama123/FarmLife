@@ -122,14 +122,14 @@ namespace KrazyKatgames
             HandleDodgeInput();
             HandleSprintInput();
             HandleJumpInput();
-            // HandleInteractionInput();
+            HandleInteractionInput();
             //
             // HandleRBInput();
             HandleRTInput();
             // HandleChargeRTInput();
             //
-            // HandleSwitchRightWeaponInput();
-            // HandleSwitchLeftWeaponInput();
+            HandleSwitchRightWeaponInput();
+            HandleSwitchLeftWeaponInput();
         }
         private void HandleRTInput()
         {
@@ -229,6 +229,31 @@ namespace KrazyKatgames
 
                 //  ATTEMPT TO PERFORM JUMP
                 player.playerLocomotionManager.AttemptToPerformJump();
+            }
+        }
+        private void HandleInteractionInput()
+        {
+            if (interaction_Input)
+            {
+                interaction_Input = false;
+
+                player.playerInteractionManager.Interact();
+            }
+        }
+        private void HandleSwitchRightWeaponInput()
+        {
+            if (switch_Right_Weapon_Input)
+            {
+                switch_Right_Weapon_Input = false;
+                player.playerEquipmentManager.SwitchRightWeapon();
+            }
+        }
+        private void HandleSwitchLeftWeaponInput()
+        {
+            if (switch_Left_Weapon_Input)
+            {
+                switch_Left_Weapon_Input = false;
+                player.playerEquipmentManager.SwitchLeftWeapon();
             }
         }
     }

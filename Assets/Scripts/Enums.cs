@@ -67,7 +67,7 @@ public enum WeaponModelType
     Shield
     // maybe Item (?)
 }
-public enum WearableModelType 
+public enum WearableModelType
 {
     Underwear,
     Mask,
@@ -85,4 +85,10 @@ public enum WeaponClass
     StraightSword,
     Fist,
     // ... todo more (!)
+}
+
+public enum ItemPickUpType
+{
+    WorldSpawn,
+    CharacterDrop,
 }

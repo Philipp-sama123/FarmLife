@@ -24,10 +24,10 @@ namespace KrazyKatgames
         private void FixedUpdate()
         {
             // If UI is not open, and we don't have a popup --> current interaction Message 
-            // if (!PlayerUIManager.instance.menuWindowIsOpen && !PlayerUIManager.instance.popupWindowIsOpen)
-            // {
-            //     CheckForInteractable();
-            // }
+            if (!PlayerUIManager.instance.menuWindowIsOpen && !PlayerUIManager.instance.popupWindowIsOpen)
+            {
+                CheckForInteractable();
+            }
         }
         private void CheckForInteractable()
         {
@@ -43,14 +43,16 @@ namespace KrazyKatgames
             // if we have an interactible action and not notified player --> do here 
             if (currentInteractableActions[0] != null)
             {
-             //   PlayerUIManager.instance.playerUIPopUpManager.SendPlayerMessagePopup(currentInteractableActions[0].interactableText);
+                PlayerUIManager.instance.playerUIPopUpManager.SendPlayerMessagePopup(currentInteractableActions[0].interactableText);
             }
         }
         public void Interact()
         {
+            PlayerUIManager.instance.playerUIPopUpManager.CloseAllPopupWindows();
+            
             if (currentInteractableActions.Count == 0)
                 return;
-            
+
             if (currentInteractableActions[0] != null)
             {
                 currentInteractableActions[0].Interact(player);

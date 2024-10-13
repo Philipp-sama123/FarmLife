@@ -9,9 +9,6 @@ namespace KrazyKatgames
         [SerializeField] private string heavy_Attack_01 = "Main_Heavy_Attack_01"; // Main Hand (Right) Heavy Attack
         [SerializeField] private string heavy_Attack_02 = "Main_Heavy_Attack_02"; // Main Hand (Right) Heavy Attack
 
-        [Header("Two Hand Heavy Attacks")]
-        [SerializeField] private string th_heavy_Attack_01 = "TH_Heavy_Attack_01"; // Two Hand (Right) Heavy Attack
-        [SerializeField] private string th_heavy_Attack_02 = "TH_Heavy_Attack_02"; // Two Hand (Right) Heavy Attack
         public override void AttemptToPerformAction(PlayerManager playerPerformingAction, WeaponItem weaponPerformingAction)
         {
             base.AttemptToPerformAction(playerPerformingAction, weaponPerformingAction);
