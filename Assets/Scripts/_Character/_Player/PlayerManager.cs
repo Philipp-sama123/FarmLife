@@ -1,10 +1,7 @@
-using System.Collections;
-using MyNamespace;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-
-namespace KrazyKatgames
+namespace KrazyKatGames
 {
     public class PlayerManager : CharacterManager
     {

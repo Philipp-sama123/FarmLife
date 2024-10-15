@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using HoaxGames;
 using UnityEngine;
 
-namespace KrazyKatgames
+namespace KrazyKatGames
 {
     public class CharacterManager : MonoBehaviour
     {

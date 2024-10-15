@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace KrazyKatgames
+namespace KrazyKatGames
 {
     public class WorldSaveGameManager : MonoBehaviour
     {

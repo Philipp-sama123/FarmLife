@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Serialization;
 
-namespace KrazyKatgames
+namespace KrazyKatGames
 {
     public class PlayerEquipmentManager : CharacterEquipmentManager
     {
@@ -11,14 +11,12 @@ namespace KrazyKatgames
 
         [Header("Weapon Model Instantiation Slots")]
         [HideInInspector] public WeaponModelInstantiationSlot rightHandWeaponSlot;
-        [HideInInspector] public WeaponModelInstantiationSlot leftHandWeaponSlot;
         [HideInInspector] public WeaponModelInstantiationSlot leftHandShieldSlot;
         [HideInInspector] public WeaponModelInstantiationSlot backSlot;
         // For each new Weapon Type add here a new Slot:
 
         [Header("Weapon Models")]
         [HideInInspector] public GameObject rightHandWeaponModel;
-        [HideInInspector] public GameObject leftHandWeaponModel;
 
         [Header("Weapon Managers")]
         [SerializeField] WeaponManager rightWeaponManager;
@@ -62,10 +60,6 @@ namespace KrazyKatgames
                 {
                     rightHandWeaponSlot = weaponSlot;
                 }
-                else if (weaponSlot.weaponSlot == WeaponModelSlot.LeftHandWeaponSlot)
-                {
-                    leftHandWeaponSlot = weaponSlot;
-                }
                 else if (weaponSlot.weaponSlot == WeaponModelSlot.LeftHandShieldSlot)
                 {
                     leftHandShieldSlot = weaponSlot;
@@ -87,7 +81,6 @@ namespace KrazyKatgames
         public void LoadWeaponsOnBothHands()
         {
             LoadRightWeapon(); // Main Weapon 
-            LoadLeftWeapon(); // Off Hand Weapon
         }
 
         //  RIGHT WEAPON
@@ -179,111 +172,6 @@ namespace KrazyKatgames
         
                 // Animator Controller is always depending on the Right Weapon (!) its the Main Weapon (!)
                 player.playerAnimatorManager.UpdateAnimatorController(player.playerInventoryManager.currentRightHandWeapon.weaponAnimator);
-                
-                player.isUsingRightHand = true;
-            }
-        }
-
-        //  LEFT WEAPON
-
-        public void SwitchLeftWeapon()
-        {
-            player.playerAnimatorManager.PlayTargetActionAnimation("Swap_Left_Weapon_01", false, false, true, true);
-
-            //  ELDEN RINGS WEAPON SWAPPING
-            //  1. Check if we have another weapon besides our main weapon, if we do, NEVER swap to unarmed, rotate between weapon 1 and 2
-            //  2. If we don't, swap to unarmed, then SKIP the other empty slot and swap back. Do not process both empty slots before returning to main weapon
-
-            WeaponItem selectedWeapon = null;
-
-            //  DISABLE TWO HANDING IF WE ARE TWO HANDING
-
-            //  ADD ONE TO OUR INDEX TO SWITCH TO THE NEXT POTENTIAL WEAPON
-            player.playerInventoryManager.leftHandWeaponIndex += 1;
-
-            //  IF OUR INDEX IS OUT OF BOUNDS, RESET IT TO POSITION #1 (0)
-            if (player.playerInventoryManager.leftHandWeaponIndex < 0 || player.playerInventoryManager.leftHandWeaponIndex > 2)
-            {
-                player.playerInventoryManager.leftHandWeaponIndex = 0;
-
-                //  WE CHECK IF WE ARE HOLDING MORE THAN ONE WEAPON
-                float weaponCount = 0;
-                WeaponItem firstWeapon = null;
-                int firstWeaponPosition = 0;
-                for (int i = 0; i < player.playerInventoryManager.weaponsInLeftHandSlots.Length; i++)
-                {
-                    if (player.playerInventoryManager.weaponsInLeftHandSlots[i].itemID != WorldItemDatabase.Instance.unarmedWeapon.itemID)
-                    {
-                        weaponCount += 1;
-                        if (firstWeapon == null)
-                        {
-                            firstWeapon = player.playerInventoryManager.weaponsInLeftHandSlots[i];
-                            firstWeaponPosition = i;
-                        }
-                    }
-                }
-
-                if (weaponCount <= 1)
-                {
-                    player.playerInventoryManager.leftHandWeaponIndex = -1;
-                    selectedWeapon = WorldItemDatabase.Instance.unarmedWeapon;
-                    // player.playerNetworkManager.currentLeftHandWeaponID.Value = selectedWeapon.itemID;
-                }
-                else
-                {
-                    player.playerInventoryManager.leftHandWeaponIndex = firstWeaponPosition;
-                    // player.playerNetworkManager.currentLeftHandWeaponID.Value = firstWeapon.itemID;
-                }
-
-                return;
-            }
-
-            foreach (WeaponItem weapon in player.playerInventoryManager.weaponsInLeftHandSlots)
-            {
-                //  IF THE NEXT POTENTIAL WEAPON DOES NOT EQUAL THE UNARMED WEAPON
-                if (player.playerInventoryManager.weaponsInLeftHandSlots[player.playerInventoryManager.leftHandWeaponIndex].itemID !=
-                    WorldItemDatabase.Instance.unarmedWeapon.itemID)
-                {
-                    selectedWeapon = player.playerInventoryManager.weaponsInLeftHandSlots[player.playerInventoryManager.leftHandWeaponIndex];
-                    //  ASSIGN THE NETWORK WEAPON ID SO IT SWITCHES FOR ALL CONNECTED CLIENTS
-                    // player.currentLeftHandWeaponID.Value = player.playerInventoryManager.
-                    //     weaponsInLeftHandSlots[player.playerInventoryManager.leftHandWeaponIndex].itemID;
-                    return;
-                }
-            }
-
-            if (selectedWeapon == null && player.playerInventoryManager.leftHandWeaponIndex <= 2) // Todo: make a member variable
-            {
-                SwitchLeftWeapon();
-            }
-        }
-
-        public void LoadLeftWeapon()
-        {
-            if (player.playerInventoryManager.currentLeftHandWeapon != null)
-            {
-                //  remove the old weapon
-                if (leftHandWeaponSlot.currentWeaponModel != null)
-                    leftHandWeaponSlot.UnloadWeapon();
-                if (leftHandShieldSlot.currentWeaponModel != null)
-                    leftHandShieldSlot.UnloadWeapon();
-
-                leftHandWeaponModel = Instantiate(player.playerInventoryManager.currentLeftHandWeapon.weaponModel);
-
-                switch (player.playerInventoryManager.currentLeftHandWeapon.weaponModelType)
-                {
-                    case WeaponModelType.Weapon:
-                        leftHandWeaponSlot.LoadWeapon(leftHandWeaponModel);
-                        break;
-                    case WeaponModelType.Shield:
-                        leftHandShieldSlot.LoadWeapon(leftHandWeaponModel);
-                        break;
-                    default:
-                        throw new ArgumentOutOfRangeException();
-                }
-
-                leftWeaponManager = leftHandWeaponModel.GetComponent<WeaponManager>();
-                leftWeaponManager.SetWeaponDamage(player, player.playerInventoryManager.currentLeftHandWeapon);
                 
                 player.isUsingRightHand = true;
             }

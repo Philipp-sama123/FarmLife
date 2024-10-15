@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace KrazyKatgames
+namespace KrazyKatGames
 {
     public class PlayerInputManager : MonoBehaviour
     {
@@ -46,6 +46,9 @@ namespace KrazyKatgames
         [SerializeField] bool RT_Input = false;
         [SerializeField] bool Hold_RT_Input = false;
 
+        [Header("Menu")]
+        [SerializeField] bool openMenuInput = false;
+
         [Header("Debug")]
         [SerializeField] bool halfMovementInput = false;
         [SerializeField] bool debugStrafing = false;
@@ -83,6 +86,9 @@ namespace KrazyKatgames
 
                 // Bumpers
                 playerControls.PlayerActions.RB.performed += i => RB_Input = true;
+
+                // Menu
+                playerControls.PlayerActions.OpenMenu.performed += i => openMenuInput = true;
 
                 // Triggers
                 playerControls.PlayerActions.RT.performed += i => RT_Input = true;
@@ -129,7 +135,7 @@ namespace KrazyKatgames
             // HandleChargeRTInput();
             //
             HandleSwitchRightWeaponInput();
-            HandleSwitchLeftWeaponInput();
+            HandleOpenCharacterMenuInput();
         }
         private void HandleRTInput()
         {
@@ -199,17 +205,18 @@ namespace KrazyKatgames
         //  ACTION
         private void HandleDodgeInput()
         {
+            //  FUTURE NOTE: RETURN (DO NOTHING) IF MENU OR UI WINDOW IS OPEN
+
             if (dodge_Input)
             {
                 dodge_Input = false;
-
-                //  FUTURE NOTE: RETURN (DO NOTHING) IF MENU OR UI WINDOW IS OPEN
-
                 player.playerLocomotionManager.AttemptToPerformDodge();
             }
         }
         private void HandleSprintInput()
         {
+            //  FUTURE NOTE: RETURN (DO NOTHING) IF MENU OR UI WINDOW IS OPEN
+
             if (sprint_Input)
             {
                 player.playerLocomotionManager.HandleSprinting();
@@ -221,13 +228,11 @@ namespace KrazyKatgames
         }
         private void HandleJumpInput()
         {
+            //  FUTURE NOTE: RETURN (DO NOTHING) IF MENU OR UI WINDOW IS OPEN
+
             if (jump_Input)
             {
                 jump_Input = false;
-
-                //  IF WE HAVE A UI WINDOW OPEN, SIMPLY RETURN WITHOUT DOING ANYTHING
-
-                //  ATTEMPT TO PERFORM JUMP
                 player.playerLocomotionManager.AttemptToPerformJump();
             }
         }
@@ -246,14 +251,25 @@ namespace KrazyKatgames
             {
                 switch_Right_Weapon_Input = false;
                 player.playerEquipmentManager.SwitchRightWeapon();
+                // ToDo: switch right weapon to the left
             }
         }
-        private void HandleSwitchLeftWeaponInput()
+        private void HandleOpenCharacterMenuInput()
         {
-            if (switch_Left_Weapon_Input)
+            if (openMenuInput)
             {
-                switch_Left_Weapon_Input = false;
-                player.playerEquipmentManager.SwitchLeftWeapon();
+                Debug.LogWarning("(!) HandleOpenCharacterMenuInput (!)");
+                Debug.LogWarning("(!) PlayerUIManager.instance.mainMenuWindowIsOpen (!) " + PlayerUIManager.instance.mainMenuWindowIsOpen);
+                openMenuInput = false;
+                PlayerUIManager.instance.playerUIPopUpManager.CloseAllPopupWindows();
+
+                if (!PlayerUIManager.instance.mainMenuWindowIsOpen)
+                    PlayerUIManager.instance.playerUIMainMenuManager.OpenMainMenu();
+                else
+                    PlayerUIManager.instance.playerUIMainMenuManager.CloseMainMenu();
+
+
+                //   PlayerUIManager.instance.playerUICharacterMenuManager.OpenCharacterMenu();
             }
         }
     }

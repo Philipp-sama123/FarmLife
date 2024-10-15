@@ -1,10 +1,6 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using KrazyKatgames;
 using UnityEngine;
 
-namespace MyNamespace
+namespace KrazyKatGames
 {
     public class PlayerBodyManager : MonoBehaviour
     {
