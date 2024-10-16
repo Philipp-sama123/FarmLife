@@ -27,7 +27,7 @@ namespace KrazyKatGames
                 Item newWeapon = item;
                 // Remove from the inventory
                 playerInventoryManager.itemsInInventory.Remove(item);
-                
+
                 Debug.LogWarning("EquipItem: " + newWeapon.itemName);
 
                 // Store the weapon that gets removed (if any)
@@ -46,7 +46,13 @@ namespace KrazyKatGames
                 if (removedWeapon != null)
                 {
                     Debug.Log("Removed weapon from last slot: " + removedWeapon.itemName);
-                    playerInventoryManager.AddItemToInventory(removedWeapon);
+                    
+                    if (removedWeapon != WorldItemDatabase.Instance.unarmedWeapon)
+                        playerInventoryManager.AddItemToInventory(removedWeapon);
+                    else
+                    {
+                        Debug.Log("Unarmed Weapon: " + removedWeapon.name);
+                    }
                 }
 
                 // Update the UI and equipment models
