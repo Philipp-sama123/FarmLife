@@ -13,4 +13,10 @@ MonoBehaviour:
   m_Name: Hoe Light Attack Weapon Item Action
   m_EditorClassIdentifier: 
   actionID: 0
-  light_Attack_01: Main_Light_Attack_01
+  light_Attack_01: Working_01
+  light_Attack_02: Working_01
+  light_Attack_03: Working_01
+  light_Attack_04: Working_01
+  run_attack_01: Main_Run_Attack_01
+  roll_attack_01: Main_Roll_Attack_01
+  backstep_attack_01: Main_Backstep_Attack_01

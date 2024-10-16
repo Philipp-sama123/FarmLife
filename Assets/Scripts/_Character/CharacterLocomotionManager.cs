@@ -9,8 +9,8 @@ namespace KrazyKatGames
 
         [Header("Ground Check & Jumping")]
         [SerializeField] protected float gravityForce = -15f;
-        [SerializeField] LayerMask groundLayer;
-        [SerializeField] float groundCheckSphereRadius = 1;
+        [SerializeField] public LayerMask groundLayer;
+        [SerializeField] public float groundCheckSphereRadius = 1;
         [SerializeField] protected Vector3 yVelocity; // THE FORCE AT WHICH OUR CHARACTER IS PULLED UP OR DOWN (Jumping or Falling)
         [SerializeField] float groundedYVelocity = -20f; // THE FORCE AT WHICH OUR CHARACTER IS STICKING TO THE GROUND WHILST THEY ARE GROUNDED
         [SerializeField] float fallStartYVelocity = -5;
@@ -65,7 +65,7 @@ namespace KrazyKatGames
             character.characterController.Move(yVelocity * Time.deltaTime);
         }
 
-        protected void HandleGroundCheck()
+        protected virtual void HandleGroundCheck()
         {
             if (character.footIK && character.footIK.getGroundedResult() != null)
             {
