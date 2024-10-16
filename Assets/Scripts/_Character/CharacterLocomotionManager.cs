@@ -76,13 +76,6 @@ namespace KrazyKatGames
                 isGrounded = Physics.CheckSphere(character.transform.position, groundCheckSphereRadius, groundLayer);
             }
         }
-
-        //  DRAWS OUR GROUND CHECK SPHERE IN SCENE VIEW
-        protected void OnDrawGizmosSelected()
-        {
-            Gizmos.DrawSphere(character.transform.position, groundCheckSphereRadius);
-        }
-
         #region Animation Events
         public void EnableCanRotate()
         {

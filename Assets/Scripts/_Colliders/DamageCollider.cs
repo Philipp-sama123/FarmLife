@@ -49,7 +49,7 @@ namespace KrazyKatGames
                 //  FRIENDLY FIRE
                 //  BLOCKING
                 //  IS INVULNERABLE
-                ChekForBlock(damageTarget);
+                CheckForBlock(damageTarget);
                 DamageTarget(damageTarget);
             }
             if (other.CompareTag("HarvestGround"))
@@ -57,7 +57,7 @@ namespace KrazyKatGames
                 Debug.LogWarning("Do something Attacked the ground");
             }
         }
-        protected virtual void ChekForBlock(CharacterManager damageTarget)
+        protected virtual void CheckForBlock(CharacterManager damageTarget)
         {
             if (charactersDamaged.Contains(damageTarget))
                 return;

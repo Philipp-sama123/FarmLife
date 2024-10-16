@@ -9,7 +9,7 @@ namespace KrazyKatGames
         public WeaponItem currentRightHandWeapon;
 
         [Header("Quick Slots")]
-        public WeaponItem[] weaponsInRightHandSlots = new WeaponItem[3];
+        public WeaponItem[] weaponsInRightHandSlots = new WeaponItem[4];
         public int rightHandWeaponIndex = 0;
 
         [Header("Inventory")]

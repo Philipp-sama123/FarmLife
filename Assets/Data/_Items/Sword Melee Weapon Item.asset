@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: Sword Melee Weapon Item
   m_EditorClassIdentifier: 
   itemName: 
-  itemIcon: {fileID: 0}
+  itemIcon: {fileID: 21300000, guid: 7519d774f28918e42acb7dce6da20244, type: 3}
   itemDescription: 
-  itemID: 0
+  itemID: 2
   itemWeight: 0
   weaponAnimator: {fileID: 0}
   weaponModelType: 0

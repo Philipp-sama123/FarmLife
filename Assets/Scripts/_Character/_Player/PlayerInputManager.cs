@@ -250,26 +250,26 @@ namespace KrazyKatGames
             if (switch_Right_Weapon_Input)
             {
                 switch_Right_Weapon_Input = false;
-                player.playerEquipmentManager.SwitchRightWeapon();
-                // ToDo: switch right weapon to the left
+                player.playerEquipmentManager.SwitchRightWeapon(+1);
+            }
+            if (switch_Left_Weapon_Input)
+            {
+                switch_Left_Weapon_Input = false;
+                player.playerEquipmentManager.SwitchRightWeapon(-1);
             }
         }
         private void HandleOpenCharacterMenuInput()
         {
             if (openMenuInput)
             {
-                Debug.LogWarning("(!) HandleOpenCharacterMenuInput (!)");
-                Debug.LogWarning("(!) PlayerUIManager.instance.mainMenuWindowIsOpen (!) " + PlayerUIManager.instance.mainMenuWindowIsOpen);
                 openMenuInput = false;
+                
                 PlayerUIManager.instance.playerUIPopUpManager.CloseAllPopupWindows();
 
                 if (!PlayerUIManager.instance.mainMenuWindowIsOpen)
                     PlayerUIManager.instance.playerUIMainMenuManager.OpenMainMenu();
                 else
                     PlayerUIManager.instance.playerUIMainMenuManager.CloseMainMenu();
-
-
-                //   PlayerUIManager.instance.playerUICharacterMenuManager.OpenCharacterMenu();
             }
         }
     }

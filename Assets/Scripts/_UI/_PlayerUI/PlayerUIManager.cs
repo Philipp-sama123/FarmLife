@@ -9,7 +9,6 @@ namespace KrazyKatGames
         [HideInInspector] public PlayerUIHudManager playerUIHudManager;
         [HideInInspector] public PlayerUIPopUpManager playerUIPopUpManager;
         [HideInInspector] public PlayerUIMainMenuManager playerUIMainMenuManager;
-
         private PlayerManager player;
 
 
