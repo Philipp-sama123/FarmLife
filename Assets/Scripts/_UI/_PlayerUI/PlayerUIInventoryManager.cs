@@ -13,9 +13,9 @@ namespace KrazyKatGames
         private List<UI_InventorySlot> slots = new List<UI_InventorySlot>();
         private void OnEnable()
         {
-            InitializeInventorySlots();
+            LoadInventorySlots();
         }
-        public void InitializeInventorySlots()
+        public void LoadInventorySlots()
         {
             ResetSlots();
 

@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Rendering;
 using UnityEngine.UI;
 
 namespace KrazyKatGames
@@ -17,11 +18,40 @@ namespace KrazyKatGames
         }
         public void EquipItem()
         {
-            Debug.LogWarning("EquipItem" + item.name);
             if (item != null)
             {
-                PlayerInputManager.instance.player.playerInventoryManager.weaponsInRightHandSlots[0] = (WeaponItem)item;
+                // Get the player's inventory manager
+                PlayerInventoryManager playerInventoryManager = PlayerInputManager.instance.player.playerInventoryManager;
+
+                // Cast the selected item to a WeaponItem
+                Item newWeapon = item;
+                // Remove from the inventory
+                playerInventoryManager.itemsInInventory.Remove(item);
+                
+                Debug.LogWarning("EquipItem: " + newWeapon.itemName);
+
+                // Store the weapon that gets removed (if any)
+                Item removedWeapon = playerInventoryManager.weaponsInRightHandSlots[playerInventoryManager.weaponsInRightHandSlots.Length - 1];
+
+                // Shift all other weapons in the array one position to the right
+                for (int i = playerInventoryManager.weaponsInRightHandSlots.Length - 1; i > 0; i--)
+                {
+                    playerInventoryManager.weaponsInRightHandSlots[i] = playerInventoryManager.weaponsInRightHandSlots[i - 1];
+                }
+
+                // Insert the new weapon at the first position (index 0)
+                playerInventoryManager.weaponsInRightHandSlots[0] = (WeaponItem)newWeapon;
+
+                // Log the removed weapon if the last slot was not null
+                if (removedWeapon != null)
+                {
+                    Debug.Log("Removed weapon from last slot: " + removedWeapon.itemName);
+                    playerInventoryManager.AddItemToInventory(removedWeapon);
+                }
+
+                // Update the UI and equipment models
                 PlayerUIManager.instance.playerUIMainMenuManager.equipmentManager.LoadEquipmentSlots();
+                PlayerUIManager.instance.playerUIMainMenuManager.inventoryManager.LoadInventorySlots();
             }
         }
     }
