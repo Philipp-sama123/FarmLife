@@ -20,7 +20,7 @@ MonoBehaviour:
   weaponAnimator: {fileID: 0}
   weaponModelType: 0
   weaponModel: {fileID: 2528878734076034129, guid: d2d34c16d2a6d4905ac39438351a2060, type: 3}
-  weaponClass: 1
+  equipmentClass: 0
   strengthREQ: 0
   dexREQ: 0
   intREQ: 0
@@ -57,8 +57,8 @@ MonoBehaviour:
   rollingAttackStaminaCostMultiplier: 0.5
   runningAttackStaminaCostMultiplier: 0.5
   backstepAttackStaminaCostMultiplier: 0.5
-  oh_RB_Action: {fileID: 0}
-  oh_RT_Action: {fileID: 0}
-  oh_LB_Action: {fileID: 0}
+  oh_RB_Action: {fileID: 11400000, guid: d87bac6971fa84c9086f2bff8fa689c7, type: 2}
+  oh_RT_Action: {fileID: 11400000, guid: d87bac6971fa84c9086f2bff8fa689c7, type: 2}
+  oh_LB_Action: {fileID: 11400000, guid: 8a73632dae6ab42f5a9950654a7f6347, type: 2}
   whooshes: []
   blocking: []

@@ -6,12 +6,12 @@ namespace KrazyKatGames
 {
     public class PlayerInventoryManager : CharacterInventoryManager
     {
-        [Header("Weapons")]
-        public WeaponItem currentRightHandWeapon;
+        [Header("Equipment")]
+        public EquippableItem currentRightHandEquipment;
 
-        [Header("Quick Slots")]
-        public WeaponItem[] weaponsInRightHandSlots = new WeaponItem[4];
-        public int rightHandWeaponIndex = 0;
+        [Header("Quick Access")]
+        public EquippableItem[] equipmentsInRightHandSlots = new EquippableItem[4];
+        public int rightHandEquipmentIndex = 0;
 
         [Header("Inventory")]
         public List<Item> itemsInInventory;
@@ -33,6 +33,5 @@ namespace KrazyKatGames
                 }
             }
         }
-        
     }
 }

@@ -305,27 +305,9 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Que_RB",
-                    "type": "Button",
-                    "id": "223c28fa-17be-4b26-bb3c-f8a54329ca4c",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
                     "name": "RT",
                     "type": "Button",
                     "id": "1b52f2b8-0a14-4225-8a46-ea6372730e68",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "Que_RT",
-                    "type": "Button",
-                    "id": "a8c6f083-c5e3-4d4e-884e-1f17f092f757",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -389,6 +371,15 @@
                     "name": "OpenMenu",
                     "type": "Button",
                     "id": "cff4fefb-2057-4c0d-a10e-7c96f4185a3c",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "LB",
+                    "type": "Button",
+                    "id": "5ba90b9e-9c7a-4b4b-a435-0ee9484fa138",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -640,50 +631,6 @@
                 },
                 {
                     "name": "",
-                    "id": "af6a0d50-62df-4814-be02-d20b465a259f",
-                    "path": "<Gamepad>/rightShoulder",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Que_RB",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "507ccccb-82c7-42fe-a4e0-13090470b592",
-                    "path": "<Mouse>/leftButton",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Que_RB",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "f07f5ac6-7a43-4664-90b8-5e1755e41b52",
-                    "path": "<Gamepad>/rightTrigger",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Que_RT",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "414dd472-660f-4bd2-9712-924e5e53bdd8",
-                    "path": "<Mouse>/rightButton",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Que_RT",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "154180da-69a5-4e11-969e-3ac6316682ae",
                     "path": "<Gamepad>/buttonNorth",
                     "interactions": "",
@@ -723,6 +670,28 @@
                     "processors": "",
                     "groups": "",
                     "action": "OpenMenu",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d47770ae-6c6e-4b96-b049-706a32c133be",
+                    "path": "<Keyboard>/q",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "LB",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "61792955-d000-4755-88be-48ef90fd6822",
+                    "path": "<Gamepad>/leftShoulder",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "LB",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

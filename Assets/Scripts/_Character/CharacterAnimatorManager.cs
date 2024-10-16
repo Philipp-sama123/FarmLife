@@ -134,7 +134,7 @@ namespace KrazyKatGames
             character.characterLocomotionManager.canMove = canMove;
         }
         public virtual void PlayTargetAttackActionAnimation(
-            WeaponItem weapon,
+            EquippableItem equippable,
             AttackType attackType,
             string targetAnimation,
             bool isPerformingAction,
@@ -150,7 +150,7 @@ namespace KrazyKatGames
             // Tell the Network --> in Attacking FLAG 
             character.characterCombatManager.currentAttackType = attackType;
             character.characterCombatManager.lastAttackAnimationPerformed = targetAnimation;
-            UpdateAnimatorController(weapon.weaponAnimator);
+            UpdateAnimatorController(equippable.weaponAnimator);
             character.characterAnimatorManager.applyRootMotion = applyRootMotion;
             character.animator.CrossFade(targetAnimation, 0.2f);
             character.isPerformingAction = isPerformingAction;

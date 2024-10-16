@@ -10,9 +10,9 @@ namespace KrazyKatGames
         PlayerManager player;
 
         [Header("Weapon Model Instantiation Slots")]
-        [HideInInspector] public WeaponModelInstantiationSlot rightHandWeaponSlot;
-        [HideInInspector] public WeaponModelInstantiationSlot leftHandShieldSlot;
-        [HideInInspector] public WeaponModelInstantiationSlot backSlot;
+        [HideInInspector] public EquippableModelInstantiationSlot rightHandEquippableSlot;
+        [HideInInspector] public EquippableModelInstantiationSlot leftHandShieldSlot;
+        [HideInInspector] public EquippableModelInstantiationSlot backSlot;
         // For each new Weapon Type add here a new Slot:
 
         [Header("Weapon Models")]
@@ -52,19 +52,19 @@ namespace KrazyKatGames
         }
         private void InitializeWeaponSlots()
         {
-            WeaponModelInstantiationSlot[] weaponSlots = GetComponentsInChildren<WeaponModelInstantiationSlot>();
+            EquippableModelInstantiationSlot[] weaponSlots = GetComponentsInChildren<EquippableModelInstantiationSlot>();
 
             foreach (var weaponSlot in weaponSlots)
             {
-                if (weaponSlot.weaponSlot == WeaponModelSlot.RightHand)
+                if (weaponSlot.equippableSlot == EquippableModelSlot.RightHandEquipmentSlot)
                 {
-                    rightHandWeaponSlot = weaponSlot;
+                    rightHandEquippableSlot = weaponSlot;
                 }
-                else if (weaponSlot.weaponSlot == WeaponModelSlot.LeftHandShieldSlot)
+                else if (weaponSlot.equippableSlot == EquippableModelSlot.LeftHandShieldSlot)
                 {
                     leftHandShieldSlot = weaponSlot;
                 }
-                else if (weaponSlot.weaponSlot == WeaponModelSlot.BackSlot)
+                else if (weaponSlot.equippableSlot == EquippableModelSlot.BackSlot)
                 {
                     backSlot = weaponSlot;
                 }
@@ -82,34 +82,34 @@ namespace KrazyKatGames
         }
 
         //  RIGHT WEAPON
-        public void SwitchRightWeapon(int direction = 1)
+        public void SwitchEquippableItem(int direction = 1)
         {
             // Add direction to index to switch to the next/previous potential weapon
-            player.playerInventoryManager.rightHandWeaponIndex += direction;
+            player.playerInventoryManager.rightHandEquipmentIndex += direction;
             
             // Wrap around the index if out of bounds (circular switching)
-            if (player.playerInventoryManager.rightHandWeaponIndex >= player.playerInventoryManager.weaponsInRightHandSlots.Length)
+            if (player.playerInventoryManager.rightHandEquipmentIndex >= player.playerInventoryManager.equipmentsInRightHandSlots.Length)
             {
                 // Wrap to the first slot
-                player.playerInventoryManager.rightHandWeaponIndex = 0;
+                player.playerInventoryManager.rightHandEquipmentIndex = 0;
             }
-            else if (player.playerInventoryManager.rightHandWeaponIndex < 0)
+            else if (player.playerInventoryManager.rightHandEquipmentIndex < 0)
             {
                 // Wrap to the last slot
-                player.playerInventoryManager.rightHandWeaponIndex = player.playerInventoryManager.weaponsInRightHandSlots.Length - 1;
+                player.playerInventoryManager.rightHandEquipmentIndex = player.playerInventoryManager.equipmentsInRightHandSlots.Length - 1;
             }
 
             // Get the selected weapon based on the updated index
-            WeaponItem selectedWeapon = player.playerInventoryManager.weaponsInRightHandSlots[player.playerInventoryManager.rightHandWeaponIndex];
+            EquippableItem selectedEquippable = player.playerInventoryManager.equipmentsInRightHandSlots[player.playerInventoryManager.rightHandEquipmentIndex];
 
             // If there's no weapon in the slot, set to unarmed by default
-            if (selectedWeapon == null)
+            if (selectedEquippable == null)
             {
-                selectedWeapon = WorldItemDatabase.Instance.unarmedWeapon;
+                selectedEquippable = WorldItemDatabase.Instance.unarmedEquippable;
             }
 
             // Update current right-hand weapon
-            player.playerInventoryManager.currentRightHandWeapon = selectedWeapon;
+            player.playerInventoryManager.currentRightHandEquipment = selectedEquippable;
             
             // Play weapon swap animation
             player.playerAnimatorManager.PlayTargetActionAnimation("Swap_Right_Weapon_01", false, false, true, true);
@@ -118,24 +118,24 @@ namespace KrazyKatGames
             LoadRightWeapon();
 
             // Log for debugging (optional)
-            Debug.Log("Switched to weapon index: " + player.playerInventoryManager.rightHandWeaponIndex);
+            Debug.Log("Switched to weapon index: " + player.playerInventoryManager.rightHandEquipmentIndex);
         }
 
         public void LoadRightWeapon()
         {
-            if (player.playerInventoryManager.currentRightHandWeapon != null)
+            if (player.playerInventoryManager.currentRightHandEquipment != null)
             {
                 //  REMOVE THE OLD WEAPON
-                rightHandWeaponSlot.UnloadWeapon();
+                rightHandEquippableSlot.UnloadWeapon();
 
                 //  BRING IN THE NEW WEAPON
-                rightHandWeaponModel = Instantiate(player.playerInventoryManager.currentRightHandWeapon.weaponModel);
-                rightHandWeaponSlot.LoadWeapon(rightHandWeaponModel);
+                rightHandWeaponModel = Instantiate(player.playerInventoryManager.currentRightHandEquipment.weaponModel);
+                rightHandEquippableSlot.LoadWeapon(rightHandWeaponModel);
                 rightWeaponManager = rightHandWeaponModel.GetComponent<WeaponManager>();
-                rightWeaponManager.SetWeaponDamage(player, player.playerInventoryManager.currentRightHandWeapon);
+                rightWeaponManager.SetWeaponDamage(player, player.playerInventoryManager.currentRightHandEquipment);
 
                 // Animator Controller is always depending on the Right Weapon (!) its the Main Weapon (!)
-                player.playerAnimatorManager.UpdateAnimatorController(player.playerInventoryManager.currentRightHandWeapon.weaponAnimator);
+                player.playerAnimatorManager.UpdateAnimatorController(player.playerInventoryManager.currentRightHandEquipment.weaponAnimator);
 
                 player.isUsingRightHand = true;
             }

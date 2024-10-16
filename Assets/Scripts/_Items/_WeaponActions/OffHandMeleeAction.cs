@@ -5,11 +5,11 @@ using UnityEngine;
 namespace KrazyKatGames
 {
     [CreateAssetMenu(menuName = "Character Actions/Weapon Actions/Off Hand Action")]
-    public class OffHandMeleeAction : WeaponItemAction
+    public class OffHandMeleeAction : EquippableItemAction
     {
-        public override void AttemptToPerformAction(PlayerManager playerPerformingAction, WeaponItem weaponPerformingAction)
+        public override void AttemptToPerformAction(PlayerManager playerPerformingAction, EquippableItem equippablePerformingAction)
         {
-            base.AttemptToPerformAction(playerPerformingAction, weaponPerformingAction);
+            base.AttemptToPerformAction(playerPerformingAction, equippablePerformingAction);
             // Check For Power Stance
             // Check for block
             if (!playerPerformingAction.playerCombatManager.canBlock)

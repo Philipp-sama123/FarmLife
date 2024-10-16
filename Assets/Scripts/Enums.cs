@@ -19,10 +19,10 @@ public enum CharacterSlot
     NO_SLOT
 }
 
-public enum WeaponModelSlot
+public enum EquippableModelSlot
 {
-    RightHand,
-    LeftHandWeaponSlot,
+    RightHandEquipmentSlot,
+    LeftHandEquipmentSlot,
     LeftHandShieldSlot,
     BackSlot
     //Right Hips
@@ -79,11 +79,13 @@ public enum WearableModelType
     Bagpack,
     ShoesAndGloves,
 }
-public enum WeaponClass
+public enum EquipmentClass
 {
-    Shield,
-    StraightSword,
+    Equippable,
     Fist,
+    Shield,
+    MeleeWeapon,
+    Bow,
     // ... todo more (!)
 }
 

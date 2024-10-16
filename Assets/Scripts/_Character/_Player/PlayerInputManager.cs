@@ -41,6 +41,7 @@ namespace KrazyKatGames
 
         [Header("Bumper Inputs")]
         [SerializeField] bool RB_Input = false;
+        [SerializeField] bool LB_Input = false;
 
         [Header("Trigger Inputs")]
         [SerializeField] bool RT_Input = false;
@@ -86,6 +87,7 @@ namespace KrazyKatGames
 
                 // Bumpers
                 playerControls.PlayerActions.RB.performed += i => RB_Input = true;
+                playerControls.PlayerActions.LB.performed += i => LB_Input = true;
 
                 // Menu
                 playerControls.PlayerActions.OpenMenu.performed += i => openMenuInput = true;
@@ -130,11 +132,12 @@ namespace KrazyKatGames
             HandleJumpInput();
             HandleInteractionInput();
             //
-            // HandleRBInput();
+            HandleRBInput();
+            HandleLBInput();
             HandleRTInput();
             // HandleChargeRTInput();
             //
-            HandleSwitchRightWeaponInput();
+            HandleSwitchEquippableInput();
             HandleOpenCharacterMenuInput();
         }
         private void HandleRTInput()
@@ -145,7 +148,7 @@ namespace KrazyKatGames
 
                 //  FUTURE NOTE: RETURN (DO NOTHING) IF MENU OR UI WINDOW IS OPEN
 
-                player.ExecuteAction();
+             //   player.ExecuteAction();
             }
         }
 
@@ -245,17 +248,46 @@ namespace KrazyKatGames
                 player.playerInteractionManager.Interact();
             }
         }
-        private void HandleSwitchRightWeaponInput()
+        private void HandleRBInput()
+        {
+            if (RB_Input)
+            {
+                RB_Input = false;
+
+                //  TODO: IF WE HAVE A UI WINDOW OPEN, RETURN AND DO NOTHING
+
+                //  player.playerNetworkManager.SetCharacterActionHand(true);
+
+                //  TODO: IF WE ARE TWO HANDING THE WEAPON, USE THE TWO HANDED ACTION
+
+                player.playerCombatManager.PerformEquipmentBasedAction(player.playerInventoryManager.currentRightHandEquipment.oh_RB_Action,
+                    player.playerInventoryManager.currentRightHandEquipment);
+            }
+        }
+        private void HandleLBInput()
+        {
+            if (LB_Input)
+            {
+                LB_Input = false;
+
+                //  TODO: IF WE ARE TWO HANDING THE WEAPON, USE THE TWO HANDED ACTION
+
+                player.playerCombatManager.PerformEquipmentBasedAction(
+                    player.playerInventoryManager.currentRightHandEquipment.oh_LB_Action,
+                    player.playerInventoryManager.currentRightHandEquipment);
+            }
+        }
+        private void HandleSwitchEquippableInput()
         {
             if (switch_Right_Weapon_Input)
             {
                 switch_Right_Weapon_Input = false;
-                player.playerEquipmentManager.SwitchRightWeapon(+1);
+                player.playerEquipmentManager.SwitchEquippableItem(+1);
             }
             if (switch_Left_Weapon_Input)
             {
                 switch_Left_Weapon_Input = false;
-                player.playerEquipmentManager.SwitchRightWeapon(-1);
+                player.playerEquipmentManager.SwitchEquippableItem(-1);
             }
         }
         private void HandleOpenCharacterMenuInput()
@@ -263,7 +295,7 @@ namespace KrazyKatGames
             if (openMenuInput)
             {
                 openMenuInput = false;
-                
+
                 PlayerUIManager.instance.playerUIPopUpManager.CloseAllPopupWindows();
 
                 if (!PlayerUIManager.instance.mainMenuWindowIsOpen)

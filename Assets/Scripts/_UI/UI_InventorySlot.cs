@@ -31,23 +31,23 @@ namespace KrazyKatGames
                 Debug.LogWarning("EquipItem: " + newWeapon.itemName);
 
                 // Store the weapon that gets removed (if any)
-                Item removedWeapon = playerInventoryManager.weaponsInRightHandSlots[playerInventoryManager.weaponsInRightHandSlots.Length - 1];
+                Item removedWeapon = playerInventoryManager.equipmentsInRightHandSlots[playerInventoryManager.equipmentsInRightHandSlots.Length - 1];
 
                 // Shift all other weapons in the array one position to the right
-                for (int i = playerInventoryManager.weaponsInRightHandSlots.Length - 1; i > 0; i--)
+                for (int i = playerInventoryManager.equipmentsInRightHandSlots.Length - 1; i > 0; i--)
                 {
-                    playerInventoryManager.weaponsInRightHandSlots[i] = playerInventoryManager.weaponsInRightHandSlots[i - 1];
+                    playerInventoryManager.equipmentsInRightHandSlots[i] = playerInventoryManager.equipmentsInRightHandSlots[i - 1];
                 }
 
                 // Insert the new weapon at the first position (index 0)
-                playerInventoryManager.weaponsInRightHandSlots[0] = (WeaponItem)newWeapon;
+                playerInventoryManager.equipmentsInRightHandSlots[0] = (EquippableItem)newWeapon;
 
                 // Log the removed weapon if the last slot was not null
                 if (removedWeapon != null)
                 {
                     Debug.Log("Removed weapon from last slot: " + removedWeapon.itemName);
                     
-                    if (removedWeapon != WorldItemDatabase.Instance.unarmedWeapon)
+                    if (removedWeapon != WorldItemDatabase.Instance.unarmedEquippable)
                         playerInventoryManager.AddItemToInventory(removedWeapon);
                     else
                     {

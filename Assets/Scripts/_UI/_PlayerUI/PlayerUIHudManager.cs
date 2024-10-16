@@ -43,15 +43,15 @@ namespace KrazyKatGames
         }
         public void SetRightWeaponQuickSlotIcon(int weaponID)
         {
-            WeaponItem weapon = WorldItemDatabase.Instance.GetWeaponByID(weaponID);
-            if (weapon == null)
+            EquippableItem equippable = WorldItemDatabase.Instance.GetWeaponByID(weaponID);
+            if (equippable == null)
             {
                 Debug.Log("Item is null!");
                 rightWeaponQuickSlotIcon.enabled = false;
                 rightWeaponQuickSlotIcon.sprite = null;
                 return;
             }
-            if (weapon.itemIcon == null)
+            if (equippable.itemIcon == null)
             {
                 Debug.LogWarning("Item has no Icon!");
                 rightWeaponQuickSlotIcon.enabled = false;
@@ -59,20 +59,20 @@ namespace KrazyKatGames
                 return;
             }
             // Check if you meet item requirements (!)
-            rightWeaponQuickSlotIcon.sprite = weapon.itemIcon;
+            rightWeaponQuickSlotIcon.sprite = equippable.itemIcon;
             rightWeaponQuickSlotIcon.enabled = true;
         }
         public void SetLeftWeaponQuickSlotIcon(int weaponID)
         {
-            WeaponItem weapon = WorldItemDatabase.Instance.GetWeaponByID(weaponID);
-            if (weapon == null)
+            EquippableItem equippable = WorldItemDatabase.Instance.GetWeaponByID(weaponID);
+            if (equippable == null)
             {
                 Debug.Log("Item is null!");
                 leftWeaponQuickSlotIcon.enabled = false;
                 leftWeaponQuickSlotIcon.sprite = null;
                 return;
             }
-            if (weapon.itemIcon == null)
+            if (equippable.itemIcon == null)
             {
                 Debug.LogWarning("Item has no Icon!");
                 leftWeaponQuickSlotIcon.enabled = false;
@@ -80,7 +80,7 @@ namespace KrazyKatGames
                 return;
             }
             // Check if you meet item requirements (!)
-            leftWeaponQuickSlotIcon.sprite = weapon.itemIcon;
+            leftWeaponQuickSlotIcon.sprite = equippable.itemIcon;
             leftWeaponQuickSlotIcon.enabled = true;
         }
     }

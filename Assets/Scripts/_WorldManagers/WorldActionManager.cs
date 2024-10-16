@@ -8,7 +8,7 @@ namespace KrazyKatGames
         public static WorldActionManager instance;
 
         [Header("Weapon Item Action")]
-        public WeaponItemAction[] weaponItemActions;
+        public EquippableItemAction[] weaponItemActions;
 
         private void Awake()
         {
@@ -29,7 +29,7 @@ namespace KrazyKatGames
             }
         }
 
-        public WeaponItemAction GetWeaponItemActionByID(int ID)
+        public EquippableItemAction GetWeaponItemActionByID(int ID)
         {
             return weaponItemActions.FirstOrDefault(action => action.actionID == ID);
         }

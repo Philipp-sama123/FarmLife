@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace KrazyKatGames
 {
@@ -8,10 +9,10 @@ namespace KrazyKatGames
     {
         public static WorldItemDatabase Instance;
 
-        public WeaponItem unarmedWeapon;
+        public EquippableItem unarmedEquippable;
 
         [Header("Weapons")]
-        [SerializeField] List<WeaponItem> weapons = new();
+        [SerializeField] List<EquippableItem> weapons = new();
 
         [Header("Equipment")]
 
@@ -35,7 +36,7 @@ namespace KrazyKatGames
             {
                 items.Add(weapon);
             }
-          
+
 
             //  assign all of the items a unique ID
             for (int i = 0; i < items.Count; i++)
@@ -47,7 +48,7 @@ namespace KrazyKatGames
         {
             DontDestroyOnLoad(this);
         }
-        public WeaponItem GetWeaponByID(int ID)
+        public EquippableItem GetWeaponByID(int ID)
         {
             return weapons.FirstOrDefault(weapon => weapon.itemID == ID);
         }
