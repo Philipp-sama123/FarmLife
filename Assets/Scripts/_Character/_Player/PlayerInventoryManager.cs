@@ -8,6 +8,7 @@ namespace KrazyKatGames
     {
         [Header("Equipment")]
         public EquippableItem currentRightHandEquipment;
+        public EquippableItem currentLeftHandEquipment;
 
         [Header("Quick Access")]
         public EquippableItem[] equipmentsInRightHandSlots = new EquippableItem[4];

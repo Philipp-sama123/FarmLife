@@ -125,25 +125,6 @@ namespace KrazyKatGames
                 default:
                     break;
             }
-            //
-            // if (characterCausingDamage.IsOwner)
-            // {
-            //     damageTarget.characterNetworkManager.NotifyTheServerOfCharacterDamageServerRpc(
-            //         damageTarget.NetworkObjectId,
-            //         characterCausingDamage.NetworkObjectId,
-            //         damageEffect.physicalDamage,
-            //         damageEffect.magicDamage,
-            //         damageEffect.fireDamage,
-            //         damageEffect.holyDamage,
-            //         damageEffect.poiseDamage,
-            //         damageEffect.angleHitFrom,
-            //         damageEffect.contactPoint.x,
-            //         contactPoint.y,
-            //         contactPoint.z
-            //     );
-            // }
-            //  ToDo: Network !
-            //  damageTarget.characterEffectsManager.ProcessInstantEffect(damageEffect);
         }
         private void ApplyAttackDamageModifiers(float modifier, TakeDamageEffect damage)
         {

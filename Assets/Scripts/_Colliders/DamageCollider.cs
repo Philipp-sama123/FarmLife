@@ -35,8 +35,12 @@ namespace KrazyKatGames
         }
         protected virtual void OnTriggerEnter(Collider other)
         {
-            Debug.LogWarning("OnTriggerEnter(Collider other): " + other.name);
+            Debug.LogWarning("IN DAMAGE COLLIDER -OnTriggerEnter(Collider other): " + other.name);
 
+            if (other.CompareTag("HarvestGround"))
+            {
+                Debug.LogWarning("Do something Attacked the ground");
+            }
             CharacterManager damageTarget = other.GetComponentInParent<CharacterManager>();
             // Check for character controller collider
             // if (damageTarget == null)
@@ -51,10 +55,6 @@ namespace KrazyKatGames
                 //  IS INVULNERABLE
                 CheckForBlock(damageTarget);
                 DamageTarget(damageTarget);
-            }
-            if (other.CompareTag("HarvestGround"))
-            {
-                Debug.LogWarning("Do something Attacked the ground");
             }
         }
         protected virtual void CheckForBlock(CharacterManager damageTarget)

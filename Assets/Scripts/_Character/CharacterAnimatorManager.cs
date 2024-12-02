@@ -152,7 +152,7 @@ namespace KrazyKatGames
             character.characterCombatManager.lastAttackAnimationPerformed = targetAnimation;
             UpdateAnimatorController(equippable.weaponAnimator);
             character.characterAnimatorManager.applyRootMotion = applyRootMotion;
-            character.animator.CrossFade(targetAnimation, 0.2f);
+            character.animator.CrossFade(targetAnimation, 0.1f);
             character.isPerformingAction = isPerformingAction;
             character.characterLocomotionManager.canRotate = canRotate;
             character.characterLocomotionManager.canMove = canMove;

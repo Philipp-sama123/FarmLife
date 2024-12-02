@@ -30,7 +30,6 @@ namespace KrazyKatGames
         #region Animation Events
         public override void EnableCanDoCombo()
         {
-            base.EnableCanDoCombo();
             player.playerCombatManager.canComboWithMainHandWeapon = true;
         }
         public override void DisableCanDoCombo()

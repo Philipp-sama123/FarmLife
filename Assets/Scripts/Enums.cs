@@ -21,13 +21,9 @@ public enum CharacterSlot
 
 public enum EquippableModelSlot
 {
-    RightHandEquipmentSlot,
-    LeftHandEquipmentSlot,
-    LeftHandShieldSlot,
+    RightHandSlot,
+    LeftHandSlot,
     BackSlot
-    //Right Hips
-    //Left Hips
-    //BackSlot
 }
 public enum CharacterGroup
 {
