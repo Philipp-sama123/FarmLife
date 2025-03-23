@@ -108,28 +108,26 @@ namespace KrazyKatGames
         }
         private void HandleGroundedMovement()
         {
-            if (player.isDead)
-                return;
-
             if (!player.playerLocomotionManager.canMove)
                 return;
 
+            Vector3 movement = moveDirection;
+
+            // Scale movement by appropriate speed
+            float speed = walkingSpeed;
             if (player.isSprinting)
-            {
-                player.characterController.Move(moveDirection * sprintingSpeed * Time.deltaTime);
-            }
-            else
-            {
-                if (PlayerInputManager.instance.moveAmount > 0.5f)
-                {
-                    player.characterController.Move(moveDirection * runningSpeed * Time.deltaTime);
-                }
-                else if (PlayerInputManager.instance.moveAmount <= 0.5f)
-                {
-                    player.characterController.Move(moveDirection * walkingSpeed * Time.deltaTime);
-                }
-            }
+                speed = sprintingSpeed;
+            else if (moveAmount > 0.5f)
+                speed = runningSpeed;
+
+            // Apply movement
+            player.characterController.Move(movement * speed * Time.deltaTime);
+
+            // If moving, rotate to face the movement direction
+            if (moveDirection.magnitude > 0)
+                HandleRotation();
         }
+
         private void HandleStrafeMovement()
         {
             if (player.playerLocomotionManager.isGrounded && !player.isJumping)
@@ -162,48 +160,35 @@ namespace KrazyKatGames
 
         private void CalculateMovementDirection()
         {
+            // Fetch input values
             GetMovementValues();
-            //  OUR MOVE DIRECTION IS BASED ON OUR CAMERAS FACING PERSPECTIVE & OUR MOVEMENT INPUTS
-            moveDirection = PlayerCamera.instance.transform.forward * verticalMovement;
-            moveDirection = moveDirection + PlayerCamera.instance.transform.right * horizontalMovement;
+
+            // Get camera's forward and right directions (ignoring vertical tilt)
+            Vector3 cameraForward = PlayerCamera.instance.cameraObject.transform.forward;
+            Vector3 cameraRight = PlayerCamera.instance.cameraObject.transform.right;
+
+            // Ignore the Y components to keep movement on the horizontal plane
+            cameraForward.y = 0;
+            cameraRight.y = 0;
+
+            // Normalize the directions
+            cameraForward.Normalize();
+            cameraRight.Normalize();
+
+            // Calculate movement direction relative to the camera
+            moveDirection = cameraForward * verticalMovement + cameraRight * horizontalMovement;
             moveDirection.Normalize();
-            moveDirection.y = 0;
         }
+
         // ToDo: this can be cleaned up (!) more function - with proper names HandleStrafeMovement(),HandleStrafeSprinting(),HandleFreeMovement()
         private void HandleRotation()
         {
-            if (player.isDead || !player.playerLocomotionManager.canRotate)
+            if (!player.playerLocomotionManager.canRotate || moveDirection == Vector3.zero)
                 return;
 
-            if (player.isLockedOn)
-            {
-                // Rotate the player to always face the camera's forward direction when locked on.
-                Vector3 cameraForward = PlayerCamera.instance.cameraObject.transform.forward;
-                cameraForward.y = 0; // Ignore vertical tilt to keep the player on the horizontal plane
-                cameraForward.Normalize(); // Normalize to ensure a valid direction
-
-                if (cameraForward != Vector3.zero)
-                {
-                    // Create a rotation based on the camera's forward direction
-                    Quaternion targetRotation = Quaternion.LookRotation(cameraForward);
-
-                    // Smoothly rotate the player towards the target direction
-                    player.transform.rotation = Quaternion.Slerp(player.transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
-                }
-            }
-            else
-            {
-                // Regular free movement rotation (already working fine).
-                Vector3 movementDirection = PlayerCamera.instance.cameraObject.transform.forward * verticalMovement +
-                                            PlayerCamera.instance.cameraObject.transform.right * horizontalMovement;
-                movementDirection.y = 0; // Lock rotation to the horizontal plane
-
-                if (movementDirection != Vector3.zero)
-                {
-                    Quaternion targetRotation = Quaternion.LookRotation(movementDirection);
-                    player.transform.rotation = Quaternion.Slerp(player.transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
-                }
-            }
+            // Smoothly rotate the player to face the movement direction
+            Quaternion targetRotation = Quaternion.LookRotation(moveDirection);
+            player.transform.rotation = Quaternion.Slerp(player.transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
         }
 
 

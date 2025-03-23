@@ -53,7 +53,7 @@ namespace KrazyKatGames
             {
                 HandleFollowTarget();
                 HandleRotations();
-                HandleCollisions();
+             //   HandleCollisions();
             }
         }
 
@@ -69,9 +69,9 @@ namespace KrazyKatGames
             //  ROTATE LEFT AND RIGHT BASED ON HORIZONTAL MOVEMENT ON THE RIGHT JOYSTICK
             leftAndRightLookAngle += (PlayerInputManager.instance.cameraHorizontal_Input * leftAndRightRotationSpeed) * Time.deltaTime;
             //  ROTATE UP AND DOWN BASED ON VERTICAL MOVEMENT ON THE RIGHT JOYSTICK
-            upAndDownLookAngle -= (PlayerInputManager.instance.cameraVertical_Input * upAndDownRotationSpeed) * Time.deltaTime;
+         //   upAndDownLookAngle -= (PlayerInputManager.instance.cameraVertical_Input * upAndDownRotationSpeed) * Time.deltaTime;
             //  CLAMP THE UP AND DOWN LOOK ANGLE BETWEEN A MIN AND MAX VALUE
-            upAndDownLookAngle = Mathf.Clamp(upAndDownLookAngle, minimumPivot, maximumPivot);
+         //   upAndDownLookAngle = Mathf.Clamp(upAndDownLookAngle, minimumPivot, maximumPivot);
 
 
             Vector3 cameraRotation = Vector3.zero;
@@ -84,7 +84,7 @@ namespace KrazyKatGames
 
             //  ROTATE THE PIVOT GAMEOBJECT UP AND DOWN
             cameraRotation = Vector3.zero;
-            cameraRotation.x = upAndDownLookAngle;
+          //  cameraRotation.x = upAndDownLookAngle;
             targetRotation = Quaternion.Euler(cameraRotation);
             cameraPivotTransform.localRotation = targetRotation;
         }
