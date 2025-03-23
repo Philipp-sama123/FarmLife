@@ -157,6 +157,22 @@ namespace KrazyKatGames
                 player.characterController.Move(movementDirection * speed * Time.deltaTime);
             }
         }
+        private void HandleStrafeRotation()
+        {
+            // Get the camera's forward vector and ignore the vertical component.
+            Vector3 cameraForward = PlayerCamera.instance.cameraObject.transform.forward;
+            cameraForward.y = 0;
+
+            // Only proceed if there is a valid forward direction.
+            if (cameraForward.sqrMagnitude > 0.001f)
+            {
+                // Calculate the target rotation based on the camera's forward.
+                Quaternion targetRotation = Quaternion.LookRotation(cameraForward);
+
+                // Smoothly rotate the player toward the target rotation.
+                player.transform.rotation = Quaternion.Slerp(player.transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+            }
+        }
 
         private void CalculateMovementDirection()
         {
@@ -185,10 +201,15 @@ namespace KrazyKatGames
         {
             if (!player.playerLocomotionManager.canRotate || moveDirection == Vector3.zero)
                 return;
-
-            // Smoothly rotate the player to face the movement direction
-            Quaternion targetRotation = Quaternion.LookRotation(moveDirection);
-            player.transform.rotation = Quaternion.Slerp(player.transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+            if (player.isLockedOn)
+            {
+                HandleStrafeRotation();
+            }
+            else
+            {
+                Quaternion targetRotation = Quaternion.LookRotation(moveDirection);
+                player.transform.rotation = Quaternion.Slerp(player.transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+            }
         }
 
 

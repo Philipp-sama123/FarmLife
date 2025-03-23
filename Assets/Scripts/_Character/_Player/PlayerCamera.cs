@@ -10,7 +10,11 @@ namespace KrazyKatGames
         public Camera cameraObject;
         [SerializeField] Transform cameraPivotTransform;
 
-        //  CHANGE THESE TO TWEAK CAMERA PERFORMANCE
+        [Header("Zoom Settings")]
+        [SerializeField] float zoomSpeed = 1f;
+        [SerializeField] float maxZoom = -0.5f; // Closer (zoomed in)
+        [SerializeField] float minZoom = -2.5f; // Further (zoomed out)
+
         [Header("Camera Settings")]
         [SerializeField]
         private float cameraSmoothSpeed = 1; // THE BIGGER THIS NUMBER, THE LONGER FOR THE CAMERA TO REACH ITS POSITION DURING MOVEMENT
@@ -22,12 +26,15 @@ namespace KrazyKatGames
         [SerializeField] LayerMask collideWithLayers;
 
         [Header("Camera Values")]
-        private Vector3 cameraVelocity;
-        private Vector3 cameraObjectPosition; //USED FOR CAMERA COLLISIONS (MOVES THE CAMERA OBJECT TO THIS POSITION UPON COLLIDING)
         [SerializeField] float leftAndRightLookAngle;
         [SerializeField] float upAndDownLookAngle;
+
         private float cameraZPosition; //  VALUES USED FOR CAMERA COLLISIONS
         private float targetCameraZPosition; //  VALUES USED FOR CAMERA COLLISIONS
+        private float currentZoom; // Holds the desired camera z-offset
+        private Vector3 cameraVelocity;
+        private Vector3 cameraObjectPosition; //USED FOR CAMERA COLLISIONS (MOVES THE CAMERA OBJECT TO THIS POSITION UPON COLLIDING)
+
 
         private void Awake()
         {
@@ -45,6 +52,7 @@ namespace KrazyKatGames
         {
             DontDestroyOnLoad(gameObject);
             cameraZPosition = cameraObject.transform.localPosition.z;
+            currentZoom = cameraObject.transform.localPosition.z;
         }
 
         public void HandleAllCameraActions()
@@ -53,7 +61,8 @@ namespace KrazyKatGames
             {
                 HandleFollowTarget();
                 HandleRotations();
-             //   HandleCollisions();
+                HandleZoom();
+                HandleCollisions();
             }
         }
 
@@ -69,9 +78,9 @@ namespace KrazyKatGames
             //  ROTATE LEFT AND RIGHT BASED ON HORIZONTAL MOVEMENT ON THE RIGHT JOYSTICK
             leftAndRightLookAngle += (PlayerInputManager.instance.cameraHorizontal_Input * leftAndRightRotationSpeed) * Time.deltaTime;
             //  ROTATE UP AND DOWN BASED ON VERTICAL MOVEMENT ON THE RIGHT JOYSTICK
-         //   upAndDownLookAngle -= (PlayerInputManager.instance.cameraVertical_Input * upAndDownRotationSpeed) * Time.deltaTime;
+            upAndDownLookAngle -= (PlayerInputManager.instance.cameraVertical_Input * upAndDownRotationSpeed) * Time.deltaTime;
             //  CLAMP THE UP AND DOWN LOOK ANGLE BETWEEN A MIN AND MAX VALUE
-         //   upAndDownLookAngle = Mathf.Clamp(upAndDownLookAngle, minimumPivot, maximumPivot);
+            upAndDownLookAngle = Mathf.Clamp(upAndDownLookAngle, minimumPivot, maximumPivot);
 
 
             Vector3 cameraRotation = Vector3.zero;
@@ -84,14 +93,14 @@ namespace KrazyKatGames
 
             //  ROTATE THE PIVOT GAMEOBJECT UP AND DOWN
             cameraRotation = Vector3.zero;
-          //  cameraRotation.x = upAndDownLookAngle;
+            cameraRotation.x = upAndDownLookAngle;
             targetRotation = Quaternion.Euler(cameraRotation);
             cameraPivotTransform.localRotation = targetRotation;
         }
 
         private void HandleCollisions()
         {
-            targetCameraZPosition = cameraZPosition;
+            targetCameraZPosition = currentZoom;
 
             RaycastHit hit;
             //  DIRECTION FOR COLLISION CHECK
@@ -117,6 +126,19 @@ namespace KrazyKatGames
             //  WE THEN APPLY OUR FINAL POSITION USING A LERP OVER A TIME OF 0.2F
             cameraObjectPosition.z = Mathf.Lerp(cameraObject.transform.localPosition.z, targetCameraZPosition, 0.2f);
             cameraObject.transform.localPosition = cameraObjectPosition;
+        }
+        private void HandleZoom()
+        {
+            // Get mouse scroll wheel input
+            float scrollInput = PlayerInputManager.instance.ZoomInput;
+            Debug.LogWarning("scrollInput abs" + Mathf.Abs(scrollInput));
+            Debug.LogWarning("scrollInput " + (scrollInput));
+            if (Mathf.Abs(scrollInput) > 0.01f)
+            {
+                // Update currentZoom based on scroll, then clamp it between minZoom and maxZoom.
+                currentZoom += scrollInput * zoomSpeed;
+                currentZoom = Mathf.Clamp(currentZoom, minZoom, maxZoom);
+            }
         }
     }
 }

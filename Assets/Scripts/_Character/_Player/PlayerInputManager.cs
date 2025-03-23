@@ -47,6 +47,10 @@ namespace KrazyKatGames
         [SerializeField] bool RT_Input = false;
         [SerializeField] bool Hold_RT_Input = false;
 
+        [Header("Camera Zoom Input")]
+        [SerializeField] float zoom_Input;
+        public float ZoomInput => zoom_Input;
+
         [Header("Menu")]
         [SerializeField] bool openMenuInput = false;
 
@@ -88,6 +92,10 @@ namespace KrazyKatGames
                 // Bumpers
                 playerControls.PlayerActions.RB.performed += i => RB_Input = true;
                 playerControls.PlayerActions.LB.performed += i => LB_Input = true;
+
+                // Zoom - make sure you have added this binding in your PlayerControls
+                playerControls.PlayerCamera.Zoom.performed += i => zoom_Input = i.ReadValue<float>();
+                playerControls.PlayerCamera.Zoom.canceled += i => zoom_Input = 0f;
 
                 // Menu
                 playerControls.PlayerActions.OpenMenu.performed += i => openMenuInput = true;
@@ -148,7 +156,7 @@ namespace KrazyKatGames
 
                 //  FUTURE NOTE: RETURN (DO NOTHING) IF MENU OR UI WINDOW IS OPEN
 
-             //   player.ExecuteAction();
+                //   player.ExecuteAction();
             }
         }
 
